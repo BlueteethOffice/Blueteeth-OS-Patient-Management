@@ -1,0 +1,33 @@
+
+Create a modern medical admin dashboard for BLUETEETH Dental Care.
+
+Theme:
+White + Light Blue
+
+Features:
+- Login System
+- Patient Management
+- Free Camp Patients
+- Clinic Visit Patients
+- Home Visit Patients
+- Doctor Management
+- Upload Reports
+- Dashboard Analytics
+- Firebase Integration
+- Responsive UI
+
+Sidebar:
+Dashboard
+Add Patient
+All Patients
+Reports
+Doctors
+Settings
+
+Dashboard Cards:
+Total Patients
+Revenue
+Today Visits
+Reports Uploaded
+
+Use React + Tailwind CSS + Firebase.
