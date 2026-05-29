@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import blueteethLogo from '../assets/blueteeth-logo.png'
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('')
@@ -35,7 +36,7 @@ export default function ForgotPassword() {
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-sm p-8">
 
         <div className="text-center mb-8">
-          <img src="/src/assets/blueteeth-logo.png" alt="BLUETEETH" className="h-16 mx-auto mb-2 object-contain" />
+          <img src={blueteethLogo} alt="BLUETEETH" className="h-16 mx-auto mb-2 object-contain" />
           <h2 className="text-xl font-bold text-gray-800">Password Reset</h2>
           <p className="text-gray-500 text-sm mt-1">Enter your email to receive a secure reset link.</p>
         </div>

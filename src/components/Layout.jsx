@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import blueteethLogo from '../assets/blueteeth-logo.png'
 
 const navItems = [
   { 
@@ -61,7 +62,7 @@ export default function Layout() {
       `}>
         <div className="p-4 border-b border-blue-600">
           <div className="flex items-center gap-2">
-            <img src="/src/assets/blueteeth-logo.png" alt="BLUETEETH" className="h-10 object-contain" />
+            <img src={blueteethLogo} alt="BLUETEETH" className="h-10 object-contain" />
             <div>
               <p className="text-white font-bold text-lg leading-tight uppercase tracking-wider">BLUETEETH</p>
               <p className="text-blue-100 text-[11px] leading-tight font-medium">dentistry at your doorstep</p>

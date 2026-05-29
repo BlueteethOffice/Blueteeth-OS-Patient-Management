@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import blueteethLogo from '../assets/blueteeth-logo.png'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -72,7 +73,7 @@ export default function LoginPage() {
 
         {/* Logo */}
         <div className="text-center mb-8">
-          <img src="/src/assets/blueteeth-logo.png" alt="BLUETEETH" className="h-16 mx-auto mb-2 object-contain" />
+          <img src={blueteethLogo} alt="BLUETEETH" className="h-16 mx-auto mb-2 object-contain" />
           <p className="text-gray-500 text-sm mt-1">Patient Portal</p>
         </div>
 

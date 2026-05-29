@@ -231,7 +231,7 @@ export default function AllPatients() {
   <div class="page">
     <div class="hdr">
       <div style="display:flex;align-items:center;">
-        <img src="/src/assets/blueteeth-logo.png" class="hdr-logo" onerror="this.style.display='none'"/>
+        <img src={blueteethLogo} class="hdr-logo" onerror="this.style.display='none'"/>
         <div class="hdr-brand">
           <h1>BLUETEETH</h1>
           <p>dentistry at your doorstep</p>
@@ -289,7 +289,7 @@ export default function AllPatients() {
   <div class="page">
     <div class="hdr">
       <div style="display:flex;align-items:center;">
-        <img src="/src/assets/blueteeth-logo.png" class="hdr-logo" onerror="this.style.display='none'"/>
+        <img src={blueteethLogo} class="hdr-logo" onerror="this.style.display='none'"/>
         <div class="hdr-brand"><h1>BLUETEETH</h1><p>dentistry at your doorstep</p></div>
       </div>
       <div class="hdr-right"><h2>ATTACHED REPORT</h2><span class="badge">${p.patientName}</span></div>
@@ -1018,7 +1018,7 @@ export default function AllPatients() {
             <div className="px-8 py-5 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white">
               <div className="flex items-center gap-3">
                 <img 
-                  src="/src/assets/blueteeth-logo.png" 
+                  src={blueteethLogo} 
                   alt="Blueteeth Logo" 
                   className="h-12 w-auto object-contain"
                 />
