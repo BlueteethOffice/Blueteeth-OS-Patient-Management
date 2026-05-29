@@ -19,7 +19,7 @@ const isPdfDownload = (url) => {
 const VISIT_BADGE = {
   'Clinic Visit': 'bg-blue-100 text-blue-700',
   'Free Camp': 'bg-orange-100 text-orange-700',
-  'Website Patient': 'bg-teal-100 text-teal-700',
+  'Online Patient': 'bg-teal-100 text-teal-700',
 }
 
 export default function AllPatients() {
@@ -874,7 +874,7 @@ export default function AllPatients() {
             <option value="All">All Visit Types</option>
             <option value="Clinic Visit">🏢 Clinic Visit</option>
             <option value="Free Camp">⛺ Free Camp</option>
-            <option value="Website Patient">🌐 Website Patient</option>
+            <option value="Online Patient">🌐 Online Patient</option>
           </select>
         </div>
       </div>

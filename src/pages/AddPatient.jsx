@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { addPatient } from '../services/patientService'
 
-const VISIT_TYPES = ['Clinic Visit', 'Free Camp', 'Website Patient']
+const VISIT_TYPES = ['Clinic Visit', 'Free Camp', 'Online Patient']
 
 const initialForm = {
   patientName: '',

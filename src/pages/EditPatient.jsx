@@ -8,7 +8,7 @@ const getReportUrl = (url) => {
   return url
 }
 
-const VISIT_TYPES = ['Clinic Visit', 'Free Camp', 'Website Patient']
+const VISIT_TYPES = ['Clinic Visit', 'Free Camp', 'Online Patient']
 
 export default function EditPatient() {
   const { id } = useParams()

@@ -64,8 +64,8 @@ export default function Dashboard() {
       ) 
     },
     { 
-      label: 'Website Patients', 
-      value: byType('Website Patient'), 
+      label: 'Online Patients', 
+      value: byType('Online Patient'), 
       color: 'bg-cyan-500/10 border-cyan-500/20 text-cyan-600 shadow-lg shadow-cyan-500/20 backdrop-blur-xl', 
       icon: (
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
