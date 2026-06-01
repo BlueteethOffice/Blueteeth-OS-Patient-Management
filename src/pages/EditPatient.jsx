@@ -144,6 +144,40 @@ export default function EditPatient() {
                 className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
+
+            {/* Treatment Date — editable */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Treatment Date
+                <span className="ml-1.5 text-xs text-blue-500 font-normal">● Editable</span>
+              </label>
+              <input
+                name="visitDate"
+                type="date"
+                value={form.visitDate || ''}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
+              />
+            </div>
+
+            {/* Record Submit Date — locked */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Record Submit Date
+                <span className="ml-1.5 text-xs text-emerald-600 font-normal">🔒 Auto</span>
+              </label>
+              <div className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-gray-50 text-gray-500 flex items-center gap-2 cursor-not-allowed select-none">
+                <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {form.createdAt
+                  ? (form.createdAt.toDate ? form.createdAt.toDate() : new Date(form.createdAt))
+                      .toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+                  : new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+                }
+                <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">Original</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -162,44 +196,6 @@ export default function EditPatient() {
                 value={form.disease || ''}
                 onChange={(val) => setForm(prev => ({ ...prev, disease: val }))}
               />
-            </div>
-
-            {/* Treatment Date — editable, past dates allowed */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Treatment Date
-                <span className="ml-1.5 text-xs text-blue-500 font-normal">● Editable</span>
-              </label>
-              <input
-                name="visitDate"
-                type="date"
-                value={form.visitDate || ''}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
-              />
-              <p className="text-xs text-gray-400 mt-1">Jab treatment hua — past date bhi dal sakte hain</p>
-            </div>
-
-            {/* Record Submit Date — locked, shows original createdAt */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Record Submit Date
-                <span className="ml-1.5 text-xs text-emerald-600 font-normal">🔒 Auto</span>
-              </label>
-              <div className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-gray-50 text-gray-500 flex items-center gap-2 cursor-not-allowed select-none">
-                <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                {form.createdAt
-                  ? (form.createdAt.toDate
-                      ? form.createdAt.toDate()
-                      : new Date(form.createdAt)
-                    ).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
-                  : new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
-                }
-                <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">Original</span>
-              </div>
-              <p className="text-xs text-gray-400 mt-1">Yeh date change nahi hogi</p>
             </div>
 
             <div>
