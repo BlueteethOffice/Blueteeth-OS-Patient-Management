@@ -4,11 +4,50 @@ import { addPatient } from '../services/patientService'
 
 const VISIT_TYPES = ['Clinic Visit', 'Free Camp', 'Online Patient']
 
+const DENTAL_SERVICES = [
+  'Dental Implant',
+  'PFM Crown',
+  'CAD-CAM/DMLS Crown',
+  'Zirconia Crown',
+  'Zirconia Premium Crown',
+  'Re-cementation (GIC)',
+  'Ceramic Veneer',
+  'Teeth Aligners',
+  'Tooth Coloured Braces',
+  'Metal Braces',
+  "Hawley's Retainer",
+  'Fixed Retainer',
+  'Oral Prophylaxis',
+  'Flap Surgery',
+  'Root Planing',
+  'Mobile Teeth Splinting',
+  'Complete Dentures (Upper & Lower)',
+  'Single Denture',
+  'Acrylic Partial Denture (Per Tooth)',
+  'Flexible Partial Denture',
+  'Root Canal Treatment (Simple)',
+  'Re-Root Canal Treatment',
+  'Core Build-up (Low Compressive Strength)',
+  'Core Build-up (High Compressive Strength)',
+  'Simple Extraction Per Tooth',
+  'Complicated Extraction Per Tooth',
+  'Simple Wisdom Tooth Removal',
+  'Complicated Wisdom Tooth Removal',
+  "Doctor's Consultation",
+  'Periapical X Ray',
+  'Composite Resin',
+  'Glass Ionomer Cement',
+  'Temporary Cement',
+]
+
+const today = new Date().toISOString().split('T')[0]
+
 const initialForm = {
   patientName: '',
   age: '',
   mobile: '',
   address: '',
+  visitDate: today,
   disease: '',
   treatment: '',
   treatmentCharge: '',
@@ -139,6 +178,19 @@ export default function AddPatient() {
                 className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
+
+            {/* Visit Date */}
+            <div className="sm:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Visit Date</label>
+              <input
+                name="visitDate"
+                type="date"
+                value={form.visitDate}
+                max={today}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
           </div>
         </div>
 
@@ -150,15 +202,28 @@ export default function AddPatient() {
             Medical Details
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            {/* Services Dropdown */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Disease / Complaint</label>
-              <input
-                name="disease"
-                value={form.disease}
-                onChange={e => setForm(prev => ({ ...prev, disease: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1) }))}
-                placeholder="e.g. Tooth Infection"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Services</label>
+              <div className="relative">
+                <select
+                  name="disease"
+                  value={form.disease}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white appearance-none"
+                >
+                  <option value="">— Select Service —</option>
+                  {DENTAL_SERVICES.map(s => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
 
             <div>

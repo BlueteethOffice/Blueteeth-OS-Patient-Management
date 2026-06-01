@@ -24,6 +24,7 @@ export async function addPatient(data, reportFile) {
     age: data.age || '',
     mobile: data.mobile || '',
     address: data.address || '',
+    visitDate: data.visitDate || '',
     disease: data.disease || '',
     treatment: data.treatment || '',
     treatmentCharge: data.treatmentCharge || '',
