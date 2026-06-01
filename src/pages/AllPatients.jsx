@@ -422,8 +422,8 @@ export default function AllPatients() {
 
     // ── PERSONAL INFORMATION ──────────────────────────────────────
     // Section card
-    fillRect(margin, y, contentW, 58, 4, [248, 250, 252])
-    strokeRect(margin, y, contentW, 58, 4, [226, 232, 240])
+    fillRect(margin, y, contentW, 80, 4, [248, 250, 252])
+    strokeRect(margin, y, contentW, 80, 4, [226, 232, 240])
 
     // Section header strip
     fillRect(margin, y, contentW, 10, 4, [237, 233, 254])
@@ -448,7 +448,22 @@ export default function AllPatients() {
     lbl('Address', margin + 5, y + 50)
     val(p.address || '\u2014', margin + 5, y + 56, [71, 85, 105], 9)
 
-    y += 64
+    // Treatment Date + Record Submit Date
+    const treatmentDateStr = p.visitDate
+      ? new Date(p.visitDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+      : '\u2014'
+    const recordDateStr = p.createdAt
+      ? (p.createdAt.toDate ? p.createdAt.toDate() : new Date(p.createdAt))
+          .toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+      : '\u2014'
+
+    lbl('Treatment Date', margin + 5, y + 66, [59, 130, 246])
+    val(treatmentDateStr, margin + 5, y + 72, [15, 23, 42], 9)
+
+    lbl('Record Submit Date', margin + 95, y + 66, [5, 150, 105])
+    val(recordDateStr, margin + 95, y + 72, [15, 23, 42], 9)
+
+    y += 78
 
     // ── CLINICAL & BILLING ────────────────────────────────────────
     fillRect(margin, y, contentW, 68, 4, [240, 249, 255])
@@ -1127,6 +1142,29 @@ export default function AllPatients() {
                     <div>
                       <span className="text-xs font-semibold text-slate-400 block">Resident Address</span>
                       <span className="text-sm font-medium text-slate-600 block leading-relaxed">{selectedPatient.address || '—'}</span>
+                    </div>
+
+                    {/* Date fields */}
+                    <div className="grid grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+                      <div>
+                        <span className="text-xs font-semibold text-blue-500 block mb-1">Treatment Date</span>
+                        <span className="text-sm font-bold text-slate-800">
+                          {selectedPatient.visitDate
+                            ? new Date(selectedPatient.visitDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+                            : '—'}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-xs font-semibold text-emerald-600 block mb-1">🔒 Record Submit Date</span>
+                        <span className="text-sm font-bold text-slate-800">
+                          {selectedPatient.createdAt
+                            ? (selectedPatient.createdAt.toDate
+                                ? selectedPatient.createdAt.toDate()
+                                : new Date(selectedPatient.createdAt)
+                              ).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+                            : '—'}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
