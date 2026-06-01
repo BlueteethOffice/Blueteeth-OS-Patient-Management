@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getPatient, updatePatient } from '../services/patientService'
+import ServiceDropdown from '../components/ServiceDropdown'
 
 const getReportUrl = (url) => {
   if (!url) return url
@@ -8,42 +9,6 @@ const getReportUrl = (url) => {
 }
 
 const VISIT_TYPES = ['Clinic Visit', 'Free Camp', 'Online Patient']
-
-const DENTAL_SERVICES = [
-  'Dental Implant',
-  'PFM Crown',
-  'CAD-CAM/DMLS Crown',
-  'Zirconia Crown',
-  'Zirconia Premium Crown',
-  'Re-cementation (GIC)',
-  'Ceramic Veneer',
-  'Teeth Aligners',
-  'Tooth Coloured Braces',
-  'Metal Braces',
-  "Hawley's Retainer",
-  'Fixed Retainer',
-  'Oral Prophylaxis',
-  'Flap Surgery',
-  'Root Planing',
-  'Mobile Teeth Splinting',
-  'Complete Dentures (Upper & Lower)',
-  'Single Denture',
-  'Acrylic Partial Denture (Per Tooth)',
-  'Flexible Partial Denture',
-  'Root Canal Treatment (Simple)',
-  'Re-Root Canal Treatment',
-  'Core Build-up (Low Compressive Strength)',
-  'Core Build-up (High Compressive Strength)',
-  'Simple Extraction Per Tooth',
-  'Complicated Extraction Per Tooth',
-  'Simple Wisdom Tooth Removal',
-  'Complicated Wisdom Tooth Removal',
-  "Doctor's Consultation",
-  'Periapical X Ray',
-  'Composite Resin',
-  'Glass Ionomer Cement',
-  'Temporary Cement',
-]
 
 const today = new Date().toISOString().split('T')[0]
 
@@ -206,24 +171,10 @@ export default function EditPatient() {
             {/* Services Dropdown */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Services</label>
-              <div className="relative">
-                <select
-                  name="disease"
-                  value={form.disease || ''}
-                  onChange={handleChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white appearance-none"
-                >
-                  <option value="">— Select Service —</option>
-                  {DENTAL_SERVICES.map(s => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                  <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </div>
+              <ServiceDropdown
+                value={form.disease || ''}
+                onChange={(val) => setForm(prev => ({ ...prev, disease: val }))}
+              />
             </div>
 
             <div>
