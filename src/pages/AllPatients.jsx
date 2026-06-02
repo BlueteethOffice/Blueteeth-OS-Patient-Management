@@ -35,7 +35,13 @@ export default function AllPatients() {
   const load = () => {
     setLoading(true)
     getPatients()
-      .then(setPatients)
+      .then(data => {
+        const enriched = data.map((p, i) => ({
+          ...p,
+          serialId: String(data.length - i).padStart(3, '0')
+        }))
+        setPatients(enriched)
+      })
       .catch(console.error)
       .finally(() => setLoading(false))
   }
@@ -239,7 +245,10 @@ export default function AllPatients() {
       </div>
       <div class="hdr-right">
         <h2>PATIENT RECORD CARD</h2>
-        <span class="badge">${p.visitType || 'Visit'}</span>
+        <div style="margin-top:6px; text-align:right;">
+          <span class="badge" style="background:#1e293b; color:#fff; margin-right:4px;">Report Card No. ${p.serialId || '---'}</span>
+          <span class="badge">${p.visitType || 'Visit'}</span>
+        </div>
       </div>
     </div>
 
@@ -410,10 +419,22 @@ export default function AllPatients() {
     pdf.setTextColor(255, 255, 255)
     pdf.text('PATIENT RECORD CARD', pageW - margin, 17, { align: 'right' })
 
+    // ID Badge
+    const idText = `Report Card No. ${p.serialId || '---'}`
+    pdf.setFontSize(8); pdf.setFont('helvetica', 'bold')
+    const idW = pdf.getTextWidth(idText) + 10
+
     // Visit type badge
     const badgeText = (p.visitType || 'Visit').toUpperCase()
     pdf.setFontSize(7); pdf.setFont('helvetica', 'bold')
     const bW = pdf.getTextWidth(badgeText) + 10
+
+    const totalBadgesW = idW + bW + 4
+
+    fillRect(pageW - margin - totalBadgesW, 20, idW, 6.5, 3, [30, 41, 59]) // dark bg
+    pdf.setTextColor(255, 255, 255)
+    pdf.text(idText, pageW - margin - totalBadgesW + idW / 2, 24.5, { align: 'center' })
+
     fillRect(pageW - margin - bW, 20, bW, 6.5, 3, [255, 255, 255])
     pdf.setTextColor(30, 64, 175)
     pdf.text(badgeText, pageW - margin - bW / 2, 24.5, { align: 'center' })
@@ -938,7 +959,7 @@ export default function AllPatients() {
                     onClick={() => setSelectedPatient(p)}
                   >
                     <td className="px-6 py-4 text-center font-bold text-slate-400">
-                      {i + 1}
+                      #{p.serialId}
                     </td>
                     <td className="px-6 py-4">
                       <div>
@@ -1049,6 +1070,9 @@ export default function AllPatients() {
               </div>
               
               <div className="flex items-center gap-2">
+                <span className="bg-slate-800 text-white text-[10px] px-2.5 py-1 rounded-full font-bold tracking-wider">
+                  Report Card No. {selectedPatient.serialId}
+                </span>
                 <span className={`inline-block text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider ${VISIT_BADGE[selectedPatient.visitType] || 'bg-slate-100 text-slate-600'}`}>
                   {selectedPatient.visitType}
                 </span>
